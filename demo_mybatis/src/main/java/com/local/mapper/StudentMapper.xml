@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--建议mapper类全名-->
+<mapper namespace="com.local.mapper.StudentMapper">
+<!--    增-->
+    <insert id="insert" >
+        insert into student values(#{sid},#{sname},#{ssex},#{sage});
+    </insert>
+
+<!--    删-->
+    <delete id="delete">
+        delete from student where sid=#{sid};
+    </delete>
+
+<!--    改-->
+    <update id="update">
+        update student set sname=#{sname},ssex=#{ssex},sage=#{sage} where sid=#{sid};
+    </update>
+
+<!--    查询单条-->
+<select id="selectOne" resultType="com.local.bean.Student">
+    select sid,sname,ssex,sage from student where sid=#{sid};
+</select>
+
+<!--    查询多条-->
+<select id="selectList" resultType="com.local.bean.Student">
+    select sid,sname,ssex,sage from student;
+</select>
+
+
+</mapper>

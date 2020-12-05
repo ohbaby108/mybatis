@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+<!--    外部引入配置文件-->
+    <properties  resource="db.properties">
+    </properties>
+<!--    environments多环境  default 默认执行的环境  （环境可以是不同的数据库）-->
+    <environments default="mysql">
+<!--        环境id-->
+        <environment id="mysql">
+<!--            通过什么连接数据库 java连接数据库为jdbc-->
+            <transactionManager type="JDBC"></transactionManager>
+<!--            数据源 是否采取数据连接池 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+<!--oracle数据库-->
+        <environment id="oracle">
+            <transactionManager type=""></transactionManager>
+            <dataSource type=""></dataSource>
+        </environment>
+<!--sqlServer数据库-->
+        <environment id="sqlServer">
+            <transactionManager type=""></transactionManager>
+            <dataSource type=""></dataSource>
+        </environment>
+    </environments>
+    <mappers>
+<!--        <mapper resource="mapper/StudentMapper.xml"></mapper>-->
+        <mapper resource="com/local/mapper/StudentMapper.xml"></mapper>
+    </mappers>
+
+</configuration>

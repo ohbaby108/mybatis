@@ -1,0 +1,33 @@
+sql:
+drop database if exists stu;
+create database stu default charset=utf8;
+use stu ;
+create table student(
+sid int not null auto_increment,
+sname varchar(25) not null,
+ssex varchar(4) not null,
+sage int not null,
+primary key(sid)
+);
+#增
+insert into student values(1,'赵一一','女',20);
+#删
+ delete from student where sid=0;
+ #改
+ update student set sname='zz',ssex='1',sage=221 where sid=1;
+ #查
+select * from student;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
