@@ -32,19 +32,4 @@ public class StudentController {
     public List<Student> selectAll(){
         return server.selectList();
     }
-
-    //查询男女各多少人
-    public List<Map<String,Object>> selectCountBySex(){
-        return server.selectCountBySex();
-    }
-
-    //根据id查询名字
-    public String selectNameById(Integer sid){
-        return server.selectNameById(sid);
-    }
-
-    //查询所有并排序之${}的使用
-    public List<Student> selectAllOrderById(String flag){
-        return server.selectAllOrderById(flag);
-    }
 }

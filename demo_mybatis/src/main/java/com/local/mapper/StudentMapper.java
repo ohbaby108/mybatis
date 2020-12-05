@@ -61,42 +61,4 @@ public class StudentMapper {
         SqlSession sqlSession= factory.openSession(true);
        return sqlSession.selectList("selectList");
     }
-
-    //设计一个方法 查询男女分别的人数
-    public List<Map<String,Object>> selectCountBySex(){
-        //创建工人
-        SqlSessionFactoryBuilder builder=new SqlSessionFactoryBuilder();
-        //工人创建工厂
-        SqlSessionFactory factory=builder.build(Thread.currentThread().getContextClassLoader().getResourceAsStream("dbconfig.xml"));
-
-        SqlSession sqlSession= factory.openSession(true);
-
-        return sqlSession.selectList("selectCountBySex");
-    }
-
-    //设计一个方法 通过id查询名字
-    public String selectNameById(Integer sid){
-        //创建工人
-        SqlSessionFactoryBuilder builder=new SqlSessionFactoryBuilder();
-        //工人创建工厂
-        SqlSessionFactory factory=builder.build(Thread.currentThread().getContextClassLoader().getResourceAsStream("dbconfig.xml"));
-
-        SqlSession sqlSession= factory.openSession(true);
-
-        return sqlSession.selectOne("selectNameById",sid);
-
-    }
-
-    //查询所有学生并排序之${}的使用
-    public List<Student> selectAllOrderById(String flag){
-        //创建一个工人
-        SqlSessionFactoryBuilder builder=new SqlSessionFactoryBuilder();
-        //工人创建工厂
-        SqlSessionFactory factory= builder.build(Thread.currentThread().getContextClassLoader().getResourceAsStream("dbconfig.xml"));
-
-        SqlSession sqlSession= factory.openSession(true);
-
-        return sqlSession.selectList("selectAllOrderById",flag);
-    }
-
 }

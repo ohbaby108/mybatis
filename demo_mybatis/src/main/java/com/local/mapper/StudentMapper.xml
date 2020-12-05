@@ -27,6 +27,20 @@
 <select id="selectList" resultType="com.local.bean.Student">
     select sid,sname,ssex,sage from student;
 </select>
+<!--    查询男女各多少人-->
+    <select id="selectCountBySex" resultType="map">
+        select ssex as 性别,count(*) as 数量 from student group by ssex;
+    </select>
+
+<!--    根据id查询名字-->
+    <select id="selectNameById" resultType="String">
+        select sname from student where sid=#{sid};
+    </select>
+
+<!--    查询所有人根据id倒序排列-->
+    <select id="selectAllOrderById" resultType="com.local.bean.Student">
+        select sid,sname,ssex,sage from student order by sid ${flag}
+    </select>
 
     <!--    查询男女各多少人-->
     <select id="selectCountBySex" resultType="map">
