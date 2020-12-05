@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.util.List;
+import java.util.Map;
 
 public class StudentMapper {
         //    设计一个方法 用于学生的新增操作
@@ -20,6 +21,7 @@ public class StudentMapper {
         // 若上面没有设置true   手动提交事务
         //   sqlSession.commit();
     }
+    //删除
     public void delete(Integer sid){
         //创建工人对象
         SqlSessionFactoryBuilder builder=new SqlSessionFactoryBuilder();
@@ -29,7 +31,7 @@ public class StudentMapper {
         SqlSession sqlSession=factory.openSession(true);//自动提交事务
         sqlSession.delete("delete",sid);
     }
-
+    //改
     public void update(Student student){
         //创建工厂
          SqlSessionFactoryBuilder builder=new SqlSessionFactoryBuilder();
@@ -40,7 +42,7 @@ public class StudentMapper {
          sqlSession.update("update",student);
 
     }
-
+    //单个查询
     public Student selectOne(Integer sid){
         //创建工人
         SqlSessionFactoryBuilder builder=new SqlSessionFactoryBuilder();
@@ -51,7 +53,7 @@ public class StudentMapper {
 
        return sqlSession.selectOne("selectOne",sid);
     }
-
+    //查询全部
     public List<Student> selectList(){
         //创建工厂
         SqlSessionFactoryBuilder builder=new SqlSessionFactoryBuilder();
@@ -61,4 +63,42 @@ public class StudentMapper {
         SqlSession sqlSession= factory.openSession(true);
        return sqlSession.selectList("selectList");
     }
+
+    //设计一个方法 查询男女分别的人数
+    public List<Map<String,Object>> selectCountBySex(){
+        //创建工人
+        SqlSessionFactoryBuilder builder=new SqlSessionFactoryBuilder();
+        //工人创建工厂
+        SqlSessionFactory factory=builder.build(Thread.currentThread().getContextClassLoader().getResourceAsStream("dbconfig.xml"));
+
+       SqlSession sqlSession= factory.openSession(true);
+
+       return sqlSession.selectList("selectCountBySex");
+    }
+
+    //设计一个方法 通过id查询名字
+    public String selectNameById(Integer sid){
+        //创建工人
+        SqlSessionFactoryBuilder builder=new SqlSessionFactoryBuilder();
+        //工人创建工厂
+        SqlSessionFactory factory=builder.build(Thread.currentThread().getContextClassLoader().getResourceAsStream("dbconfig.xml"));
+
+        SqlSession sqlSession= factory.openSession(true);
+
+       return sqlSession.selectOne("selectNameById",sid);
+
+    }
+
+    //查询所有学生并排序之${}的使用
+    public List<Student> selectAllOrderById(String flag){
+        //创建一个工人
+        SqlSessionFactoryBuilder builder=new SqlSessionFactoryBuilder();
+        //工人创建工厂
+        SqlSessionFactory factory= builder.build(Thread.currentThread().getContextClassLoader().getResourceAsStream("dbconfig.xml"));
+
+        SqlSession sqlSession= factory.openSession(true);
+
+        return sqlSession.selectList("selectAllOrderById",flag);
+    }
+
 }

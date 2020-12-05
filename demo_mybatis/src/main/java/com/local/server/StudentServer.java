@@ -4,6 +4,7 @@ import com.local.bean.Student;
 import com.local.mapper.StudentMapper;
 
 import java.util.List;
+import java.util.Map;
 
 public class StudentServer {
 
@@ -32,5 +33,21 @@ public class StudentServer {
     public List<Student> selectList(){
         return mapper.selectList();
     }
+
+    //查询单女各多少人
+    public List<Map<String,Object>> selectCountBySex(){
+        return mapper.selectCountBySex();
+    }
+
+    //根据id查询名字
+    public String selectNameById(Integer sid){
+        return mapper.selectNameById(sid);
+    }
+
+    //查询所有并排序之${}的使用
+    public List<Student> selectAllOrderById(String flag){
+        return mapper.selectAllOrderById(flag);
+    }
+
 
 }
