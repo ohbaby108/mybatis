@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.local.mapper.PersonMapper">
+
+    <resultMap id="selectPerson" type="com.local.bean.Person">
+        <id column="pid" property="pid"></id>
+        <result column="pname" property="pname"></result>
+        <association property="idcard" javaType="com.local.bean.Idcard">
+            <result column="cardId" property="cardId"></result>
+            <result column="address" property="address"></result>
+        </association>
+    </resultMap>
+
+  <select id="selectOne" resultMap="selectPerson">
+     select p.pid,p.pname,i.cardId,i.address from person p,Idcard i
+where p.pid=i.pid and p.pid=#{pid};
+</select>
+
+    <select id="selectList" resultMap="selectPerson">
+        select p.pid,p.pname,i.cardId,i.address from person p,Idcard i
+where p.pid=i.pid
+    </select>
+
+</mapper>

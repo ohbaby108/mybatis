@@ -1,0 +1,5 @@
+当我们在实现一对一或者实现一对多或者多对多时 如果操作另一张表记得改配置 :
+
+
+<mapper resource="com/local/mapper/IdcardMapper.xml"></mapper>
+<mapper resource="com/local/mapper/PersonMapper.xml"></mapper>
