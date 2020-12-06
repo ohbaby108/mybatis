@@ -3,3 +3,26 @@
 
 <mapper resource="com/local/mapper/IdcardMapper.xml"></mapper>
 <mapper resource="com/local/mapper/PersonMapper.xml"></mapper>
+
+
+drop database if exists personInfo;
+create database personInfo default  char set utf8;
+use personInfo;
+create table Idcard(
+cardId varchar(18) not null unique comment '身份证号',
+address varchar(100) comment '发证地址',
+pid int
+);
+create table person(
+pid int not null auto_increment comment '人的编号',
+pname varchar(50)not null comment '姓名',
+primary key(pid)
+);
+
+insert into idCard values('522224197002061234','白云区',1);
+insert into person values(1,'赵一一');
+insert into idCard values('522224197002061235','海淀区',2);
+insert into person values(2,'钱二二');
+#外键
+alter table Idcard add constraint fk_Idcard_person foreign key(pid)
+references person(pid);
