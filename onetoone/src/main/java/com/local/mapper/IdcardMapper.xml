@@ -2,7 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--类全名-->
 <mapper namespace="com.local.mapper.IdcardMapper">
+    <!--    方案一：-->
+    <!--    查询2遍    -->
+
+    <!--    <resultMap id="BaseResultMap" type="com.local.bean.Idcard">-->
+    <!--        <id column="cardId" property="cardId"></id>-->
+    <!--        <result column="address" property="address"></result>-->
+    <!--        <association property="person" column="pid" select="selectPerson" javaType="com.local.bean.Person"></association>-->
+    <!--    </resultMap>-->
+    <!--<select id="selectPerson" resultType="com.local.bean.Person">-->
+    <!--    select pid,pname from person where pid=#{pid};-->
+    <!--</select>-->
+    <!--    <select id="selectOne" resultMap="BaseResultMap">-->
+    <!--       select cardId,address, pid from  idcard where cardId=#{cardId};-->
+    <!--    </select>-->
+
+    <!--    <select id="selectList" resultMap="BaseResultMap">-->
+    <!--        select cardId,address, pid from  idcard;-->
+    <!--    </select>-->
+
+
+
+
 <!--    ========================================方式二==================================-->
+<!--    先全部查询出来-->
 
 
     <resultMap id="BaseResultMap" type="com.local.bean.Idcard">
@@ -13,30 +36,12 @@
             <result column="pname" property="pname"></result>
         </association>
     </resultMap>
-<!--===========================================方式一：==================================-->
-    <!-- 通用查询映射结果 -->
-    <!--    当一个具体的对象里面还有对象(指一对一 一对多 多对多)  我们就需要自定义一个赋值的规则-->
-<!--    <resultMap id="BaseResultMap" type="com.local.bean.Idcard">-->
-<!--&lt;!&ndash;        非主键列&ndash;&gt;-->
-<!--        <result column="cardId" property="cardId" />-->
-<!--&lt;!&ndash;        非主键列&ndash;&gt;-->
-<!--        <result column="address" property="address" />-->
-<!--&lt;!&ndash;        外键列&ndash;&gt;-->
-<!--        <association property="person" column="pid" select="selectPerson" javaType="com.local.bean.Person" ></association>-->
-<!--    </resultMap>-->
-
-<!--    <select id="selectPerson" resultType="com.local.bean.Person">-->
-<!--        select pid,pname from person where pid=#{pid};-->
-<!--    </select>-->
-<!--    ========================================================================-->
 
 <!--   通过查询卡信息的查询 查出人的id 通过查询人的id从而查询人的全部信息 -->
     <select id="selectOne" resultMap="BaseResultMap">
        select p.pid,p.pname,i.cardId,i.address from Idcard i, person p
        where i.pid=p.pid and i.cardId=#{cardId};
-
     </select>
-
     <select id="selectList" resultMap="BaseResultMap">
         select p.pid,p.pname,i.cardId,i.address from Idcard i, person p
        where i.pid=p.pid

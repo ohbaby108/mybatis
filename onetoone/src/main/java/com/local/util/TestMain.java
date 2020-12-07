@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TestMain {
     public static void main(String[] args) {
-//        IdcardMapper idcardMapper=new IdcardMapper();
+        IdcardMapper idcardMapper=new IdcardMapper();
          //单个人的信息查询
 //        Idcard idCard=idcardMapper.selectOne("522224197002061234");
 //        System.out.println(idCard);
@@ -19,6 +19,7 @@ public class TestMain {
 //        for(Idcard idcard:idcards){
 //            System.out.println(idcard);
 //        }
+
 
         PersonMapper mapper=new PersonMapper();
 //       Person person= mapper.selectOne(1);

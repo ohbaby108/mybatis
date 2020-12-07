@@ -6,20 +6,43 @@
     <resultMap id="selectPerson" type="com.local.bean.Person">
         <id column="pid" property="pid"></id>
         <result column="pname" property="pname"></result>
-        <association property="idcard" javaType="com.local.bean.Idcard">
-            <result column="cardId" property="cardId"></result>
-            <result column="address" property="address"></result>
-        </association>
+<!--        column通过哪个id查询-->
+        <association property="idcard" column="pid" select="selectIdcard" javaType="com.local.bean.Idcard"></association>
     </resultMap>
+    <select id="selectIdcard" resultType="com.local.bean.Idcard">
+        select cardId,address ,pid from Idcard where pid=#{pid};
+    </select>
 
-  <select id="selectOne" resultMap="selectPerson">
-     select p.pid,p.pname,i.cardId,i.address from person p,Idcard i
-where p.pid=i.pid and p.pid=#{pid};
-</select>
+    <select id="selectOne" resultMap="selectPerson">
+        select pid,pname from Person where pid=#{pid}
+    </select>
 
     <select id="selectList" resultMap="selectPerson">
-        select p.pid,p.pname,i.cardId,i.address from person p,Idcard i
-where p.pid=i.pid
+         select pid,pname from Person
     </select>
+
+
+
+
+<!--    方案二：-->
+
+<!--    <resultMap id="selectPerson" type="com.local.bean.Person">-->
+<!--        <id column="pid" property="pid"></id>-->
+<!--        <result column="pname" property="pname"></result>-->
+<!--        <association property="idcard" javaType="com.local.bean.Idcard">-->
+<!--            <result column="cardId" property="cardId"></result>-->
+<!--            <result column="address" property="address"></result>-->
+<!--        </association>-->
+<!--    </resultMap>-->
+
+<!--  <select id="selectOne" resultMap="selectPerson">-->
+<!--     select p.pid,p.pname,i.cardId,i.address from person p,Idcard i-->
+<!--where p.pid=i.pid and p.pid=#{pid};-->
+<!--</select>-->
+
+<!--    <select id="selectList" resultMap="selectPerson">-->
+<!--        select p.pid,p.pname,i.cardId,i.address from person p,Idcard i-->
+<!--where p.pid=i.pid-->
+<!--    </select>-->
 
 </mapper>
