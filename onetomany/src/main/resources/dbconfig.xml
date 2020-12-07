@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+<!--    外部引入配置文件-->
+    <properties  resource="db.properties"></properties>
+    <settings>
+<!--        解决N+1问题 -->
+        <!--开启延迟加载的机制 关联的对象可以延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--aggressive 攻击性 侵略性 关闭对象的侵略性 不用就不需要加载 用到了关联对象的任意属性 就加载-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+<!--    environments多环境  default 默认执行的环境  （环境可以是不同的数据库）-->
+    <environments default="mysql">
+
+<!--        环境id-->
+        <environment id="mysql">
+<!--            通过什么连接数据库 java连接数据库为jdbc-->
+            <transactionManager type="JDBC"></transactionManager>
+<!--            数据源 是否采取数据连接池 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+<!--oracle数据库-->
+        <environment id="oracle">
+            <transactionManager type=""></transactionManager>
+            <dataSource type=""></dataSource>
+        </environment>
+<!--sqlServer数据库-->
+        <environment id="sqlServer">
+            <transactionManager type=""></transactionManager>
+            <dataSource type=""></dataSource>
+        </environment>
+    </environments>
+    <mappers>
+<!--        <mapper resource="com/local/mapper/EmpMapper.xml"></mapper>-->
+        <mapper resource="com/local/mapper/DeptMapper.xml"></mapper>
+    </mappers>
+
+</configuration>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.local.mapper.EmpMapper">
+
+    <!-- 通用查询映射结果 -->
+
+<!--方案一:    -->
+
+<!--    <resultMap id="BaseResultMap" type="com.local.bean.Emp">-->
+<!--        <id column="empno" property="empno" />-->
+<!--        <result column="ename" property="ename" />-->
+<!--        <result column="job" property="job" />-->
+<!--        <result column="mgr" property="mgr" />-->
+<!--        <result column="hiredate" property="hiredate" />-->
+<!--        <result column="sal" property="sal" />-->
+<!--        <result column="comn" property="comn" />-->
+<!--&lt;!&ndash;        <result column="deptno" property="deptno" />&ndash;&gt;-->
+<!--        <association property="dept" select="selectDept" javaType="com.local.bean.Dept" column="deptno"></association>-->
+<!--    </resultMap>-->
+<!--<select id="selectDept" resultType="com.local.bean.Dept">-->
+<!--    select deptno,dname,loc from Dept where deptno=#{deptno}-->
+<!--</select>-->
+
+<!--    <select id="selectOne" resultMap="BaseResultMap">-->
+<!--        select empno,ename,job,mgr,hiredate,sal,comn,deptno-->
+<!--from emp  where empno=#{empno};-->
+<!--    </select>-->
+<!--   <select id="selectList" resultMap="BaseResultMap">-->
+<!--       select empno,ename,job,mgr,hiredate,sal,comn,deptno from emp-->
+<!--   </select>-->
+
+<!--    方案二:-->
+
+
+    <resultMap id="selectEmpAndDept" type="com.local.bean.Emp">
+        <id column="empno" property="empno"></id>
+        <result column="ename" property="ename"></result>
+        <result column="job" property="job"></result>
+        <result column="mgr" property="mgr"></result>
+        <result column="sal" property="sal"></result>
+        <result column="comn" property="comn"></result>
+        <association property="dept" javaType="com.local.bean.Dept">
+            <id column="deptno" property="deptno"></id>
+            <result column="dname" property="dname"></result>
+            <result column="loc" property="loc"></result>
+        </association>
+    </resultMap>
+    <select id="selectOne" resultMap="selectEmpAndDept">
+        select e.empno,e.ename,e.job,e.mgr,e.hiredate,e.sal,e.comn,d.deptno
+,d.dname,d.loc from emp e,dept d where
+e.deptno=d.deptno and empno=7369;
+    </select>
+    <select id="selectList" resultMap="selectEmpAndDept">
+        select e.empno,e.ename,e.job,e.mgr,e.hiredate,e.sal,e.comn,d.deptno
+,d.dname,d.loc from emp e,dept d where
+e.deptno=d.deptno
+    </select>
+
+</mapper>
